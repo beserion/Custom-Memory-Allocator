@@ -1,10 +1,3 @@
-Tamam — aşağıdaki **README.md**, GitHub’da *kusursuz* görünmesi için yeniden düzenlendi.
-Tasarım sade, hizalar düzgün, başlıklar net, emoji uyumu stabil.
-
-Sadece **kopyala & yapıştır** yap.
-
----
-
 # Custom Memory Allocator
 
 A lightweight and educational clone of `malloc`, `free`, `realloc`, and `calloc`.
