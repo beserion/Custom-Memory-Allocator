@@ -1,10 +1,11 @@
 Custom Memory Allocator
 
-A lightweight and educational clone of malloc, free, realloc, and calloc. This project demonstrates how dynamic memory management works under the hood by implementing a simple heap manager in C.
+A lightweight and educational clone of malloc, free, realloc, and calloc.
+This project demonstrates how dynamic memory management works internally by implementing a simple heap manager in C.
 
 🚀 Features
 
-Custom implementations of:
+Custom implementation of:
 
 malloc
 
@@ -16,15 +17,15 @@ calloc
 
 Metadata-based block management
 
-Heap expansion using sbrk() or mmap()
+Heap expansion via sbrk() or mmap()
 
-Block splitting and merging (coalescing)
+Block splitting & coalescing
 
 Basic fragmentation handling
 
 Fully written in C
 
-Clean and modular structure
+Clean, modular structure
 
 📂 Project Structure
 custom-allocator/
@@ -45,7 +46,7 @@ custom-allocator/
 
 🧠 Architecture Overview
 
-Each allocated region is represented with this metadata header:
+Each allocated memory block starts with a metadata header:
 
 typedef struct s_block {
     size_t size;
@@ -54,23 +55,23 @@ typedef struct s_block {
 } t_block;
 
 
-Memory flow:
+Allocation flow:
 
-malloc(x) searches for a suitable free block
+malloc(size) searches for a suitable free block
 
-If none exists, the heap is expanded
+If none exists, heap is expanded
 
-Metadata + user memory are allocated
+Metadata + usable memory are returned
 
-free() marks the block as available
+free() marks the block as free
 
-Adjacent free blocks merge (coalescing)
+Neighboring free blocks merge (coalescing)
 
-🔧 Build & Run
+🔧 Build & Usage
 Compile
 make
 
-Example
+Example Program
 #include "allocator.h"
 
 int main(void)
@@ -78,18 +79,19 @@ int main(void)
     char *p = malloc(20);
     p = realloc(p, 100);
     free(p);
+    return 0;
 }
 
-Run tests
+Run Tests
 make test
 
 📈 Roadmap
 
- Thread-safe version
+ Thread-safe allocator (mutex)
 
- mmap-based page manager
+ mmap-based page allocator
 
- Benchmark tools
+ Benchmark utilities
 
  Valgrind integration
 
