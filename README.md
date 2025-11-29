@@ -1,11 +1,10 @@
 Custom Memory Allocator
 
-A lightweight and educational clone of malloc, free, realloc, and calloc.
-This project demonstrates how dynamic memory management works under the hood by implementing a simple heap manager in C.
+A lightweight and educational clone of malloc, free, realloc, and calloc. This project demonstrates how dynamic memory management works under the hood by implementing a simple heap manager in C.
 
 🚀 Features
 
-Custom implementation of:
+Custom implementations of:
 
 malloc
 
@@ -21,11 +20,11 @@ Heap expansion using sbrk() or mmap()
 
 Block splitting and merging (coalescing)
 
-Simple fragmentation handling
+Basic fragmentation handling
 
 Fully written in C
 
-Clean, modular code structure
+Clean and modular structure
 
 📂 Project Structure
 custom-allocator/
@@ -35,7 +34,7 @@ custom-allocator/
 │   ├── free.c
 │   ├── realloc.c
 │   ├── calloc.c
-│   ├── block.c        # metadata, split/merge, utilities
+│   ├── block.c
 │   └── allocator.h
 │
 ├── tests/
@@ -46,7 +45,7 @@ custom-allocator/
 
 🧠 Architecture Overview
 
-Every allocated block is described using a simple metadata header:
+Each allocated region is represented with this metadata header:
 
 typedef struct s_block {
     size_t size;
@@ -57,15 +56,13 @@ typedef struct s_block {
 
 Memory flow:
 
-User requests malloc(x)
-
-Allocator searches for a free block of suitable size
+malloc(x) searches for a suitable free block
 
 If none exists, the heap is expanded
 
-Metadata + user space are allocated
+Metadata + user memory are allocated
 
-free() marks blocks as available
+free() marks the block as available
 
 Adjacent free blocks merge (coalescing)
 
@@ -73,7 +70,7 @@ Adjacent free blocks merge (coalescing)
 Compile
 make
 
-Example Usage
+Example
 #include "allocator.h"
 
 int main(void)
@@ -88,14 +85,14 @@ make test
 
 📈 Roadmap
 
- Thread-safe version (mutex)
+ Thread-safe version
 
  mmap-based page manager
 
- Performance benchmarking tools
+ Benchmark tools
 
  Valgrind integration
 
 📝 License
 
-Distributed under the MIT License.
+MIT License.
