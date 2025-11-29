@@ -1,33 +1,37 @@
-Custom Memory Allocator
+Tamam — aşağıdaki **README.md**, GitHub’da *kusursuz* görünmesi için yeniden düzenlendi.
+Tasarım sade, hizalar düzgün, başlıklar net, emoji uyumu stabil.
 
-A lightweight and educational clone of malloc, free, realloc, and calloc.
+Sadece **kopyala & yapıştır** yap.
+
+---
+
+# Custom Memory Allocator
+
+A lightweight and educational clone of `malloc`, `free`, `realloc`, and `calloc`.
 This project demonstrates how dynamic memory management works internally by implementing a simple heap manager in C.
 
-🚀 Features
+---
 
-Custom implementation of:
+## 🚀 Features
 
-malloc
+* Custom implementation of:
 
-free
+  * `malloc`
+  * `free`
+  * `realloc`
+  * `calloc`
+* Metadata-based block management
+* Heap expansion via `sbrk()` or `mmap()`
+* Block splitting & coalescing
+* Basic fragmentation handling
+* Fully written in C
+* Clean, modular structure
 
-realloc
+---
 
-calloc
+## 📂 Project Structure
 
-Metadata-based block management
-
-Heap expansion via sbrk() or mmap()
-
-Block splitting & coalescing
-
-Basic fragmentation handling
-
-Fully written in C
-
-Clean, modular structure
-
-📂 Project Structure
+```
 custom-allocator/
 │
 ├── src/
@@ -43,35 +47,43 @@ custom-allocator/
 │
 ├── README.md
 └── Makefile
+```
 
-🧠 Architecture Overview
+---
+
+## 🧠 Architecture Overview
 
 Each allocated memory block starts with a metadata header:
 
+```c
 typedef struct s_block {
     size_t size;
     int    free;
     struct s_block *next;
 } t_block;
+```
 
+**Allocation flow:**
 
-Allocation flow:
+1. `malloc(size)` searches for a suitable free block
+2. If none exists, heap is expanded
+3. Metadata + usable memory are returned
+4. `free()` marks the block as free
+5. Neighboring free blocks merge (coalescing)
 
-malloc(size) searches for a suitable free block
+---
 
-If none exists, heap is expanded
+## 🔧 Build & Usage
 
-Metadata + usable memory are returned
+### Compile
 
-free() marks the block as free
-
-Neighboring free blocks merge (coalescing)
-
-🔧 Build & Usage
-Compile
+```bash
 make
+```
 
-Example Program
+### Example Program
+
+```c
 #include "allocator.h"
 
 int main(void)
@@ -81,20 +93,28 @@ int main(void)
     free(p);
     return 0;
 }
+```
 
-Run Tests
+### Run Tests
+
+```bash
 make test
+```
 
-📈 Roadmap
+---
 
- Thread-safe allocator (mutex)
+## 📈 Roadmap
 
- mmap-based page allocator
+* [ ] Thread-safe allocator (mutex)
+* [ ] mmap-based page allocator
+* [ ] Benchmark utilities
+* [ ] Valgrind integration
 
- Benchmark utilities
+---
 
- Valgrind integration
-
-📝 License
+## 📝 License
 
 MIT License.
+
+
+da ekleyebilirim.
